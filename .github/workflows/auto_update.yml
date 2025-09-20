@@ -1,0 +1,45 @@
+name: Auto Fetch Upstream
+
+on:
+  schedule:
+    - cron: "0 0 * * *"   # 毎日0時に実行（UTC）
+  workflow_dispatch:      # 手動実行も可能
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. リポジトリをチェックアウト
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # 履歴も取得
+
+      # 2. GitHub Actions での認証設定
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      # 3. upstream リポジトリを追加
+      - name: Add upstream remote
+        run: |
+          git remote add upstream https://github.com/aws-samples/generative-ai-use-cases.git || echo "upstream exists"
+
+      # 4. upstream の更新を取得
+      - name: Fetch upstream
+        run: git fetch upstream
+
+      # 5. upstream/main を自分の main にマージ
+      - name: Merge upstream
+        run: |
+          git checkout main
+          git merge upstream/main --no-edit || echo "Merge conflict. Please resolve manually."
+
+      # 6. 自分のリポジトリに push
+      - name: Push changes
+        uses: ad-m/github-push-action@v0.6.0
+        with:
+          branch: main
+          github_token: ${{ secrets.GH_PAT }}
