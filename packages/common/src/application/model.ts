@@ -380,9 +380,30 @@ export const modelMetadata: Record<string, ModelMetadata> = {
     displayName: 'Command R+',
   },
   // DeepSeek
+  'deepseek.v3-v1:0': {
+    flags: MODEL_FEATURE.TEXT_ONLY,
+    displayName: 'DeepSeek V3.1',
+  },
   'us.deepseek.r1-v1:0': {
     flags: MODEL_FEATURE.TEXT_DOC_REASONING,
     displayName: 'DeepSeek-R1',
+  },
+  // Qwen
+  'qwen.qwen3-235b-a22b-2507-v1:0': {
+    flags: MODEL_FEATURE.TEXT_ONLY,
+    displayName: 'Qwen3 235B A22B 2507',
+  },
+  'qwen.qwen3-32b-v1:0': {
+    flags: MODEL_FEATURE.TEXT_ONLY,
+    displayName: 'Qwen3 32B',
+  },
+  'qwen.qwen3-coder-480b-a35b-v1:0': {
+    flags: MODEL_FEATURE.TEXT_ONLY,
+    displayName: 'Qwen3-Coder 480B A35B Instruct',
+  },
+  'qwen.qwen3-coder-30b-a3b-v1:0': {
+    flags: MODEL_FEATURE.TEXT_ONLY,
+    displayName: 'Qwen3-Coder 30B A3B Instruct',
   },
   // Writer
   'us.writer.palmyra-x4-v1:0': {
