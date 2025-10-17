@@ -31,6 +31,7 @@ import {
   applyAutoCacheToSystem,
 } from './promptCache';
 import { getFormatFromMimeType, getMimeTypeFromFileName } from './media';
+import { convertToSafeFilename } from './fileNameUtils';
 
 // Default Models
 
@@ -428,9 +429,7 @@ const createConverseCommandInput = (
           contentBlocks.push({
             document: {
               format,
-              name: extra.name
-                .split('.')[0]
-                .replace(/[^a-zA-Z0-9\s\-()[\]]/g, 'X'), // If the file name contains Japanese, it will cause an error, so convert it
+              name: convertToSafeFilename(extra.name),
               source: {
                 bytes: Buffer.from(extra.source.data, 'base64'),
               },
@@ -1000,6 +999,38 @@ export const BEDROCK_TEXT_GEN_MODELS: {
     extractConverseStreamOutput: extractConverseStreamOutput,
   },
   'jp.anthropic.claude-sonnet-4-5-20250929-v1:0': {
+    defaultParams: CLAUDE_SONNET_4_DEFAULT_PARAMS,
+    usecaseParams: USECASE_DEFAULT_PARAMS,
+    createConverseCommandInput: createConverseCommandInput,
+    createConverseStreamCommandInput: createConverseStreamCommandInput,
+    extractConverseOutput: extractConverseOutput,
+    extractConverseStreamOutput: extractConverseStreamOutput,
+  },
+  'global.anthropic.claude-haiku-4-5-20251001-v1:0': {
+    defaultParams: CLAUDE_SONNET_4_DEFAULT_PARAMS,
+    usecaseParams: USECASE_DEFAULT_PARAMS,
+    createConverseCommandInput: createConverseCommandInput,
+    createConverseStreamCommandInput: createConverseStreamCommandInput,
+    extractConverseOutput: extractConverseOutput,
+    extractConverseStreamOutput: extractConverseStreamOutput,
+  },
+  'us.anthropic.claude-haiku-4-5-20251001-v1:0': {
+    defaultParams: CLAUDE_SONNET_4_DEFAULT_PARAMS,
+    usecaseParams: USECASE_DEFAULT_PARAMS,
+    createConverseCommandInput: createConverseCommandInput,
+    createConverseStreamCommandInput: createConverseStreamCommandInput,
+    extractConverseOutput: extractConverseOutput,
+    extractConverseStreamOutput: extractConverseStreamOutput,
+  },
+  'eu.anthropic.claude-haiku-4-5-20251001-v1:0': {
+    defaultParams: CLAUDE_SONNET_4_DEFAULT_PARAMS,
+    usecaseParams: USECASE_DEFAULT_PARAMS,
+    createConverseCommandInput: createConverseCommandInput,
+    createConverseStreamCommandInput: createConverseStreamCommandInput,
+    extractConverseOutput: extractConverseOutput,
+    extractConverseStreamOutput: extractConverseStreamOutput,
+  },
+  'jp.anthropic.claude-haiku-4-5-20251001-v1:0': {
     defaultParams: CLAUDE_SONNET_4_DEFAULT_PARAMS,
     usecaseParams: USECASE_DEFAULT_PARAMS,
     createConverseCommandInput: createConverseCommandInput,
